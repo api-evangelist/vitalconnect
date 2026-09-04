@@ -1,0 +1,78 @@
+generated: '2026-09-04'
+method: searched
+source: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+scope: >-
+  What can honestly be said about VitalConnect's runtime semantics from public material. The
+  request/response contract of the VitalConnect Platform API lives in MAN-001, which is not
+  public, so every field below describes either the publicly documented VistaCenter webhook
+  surface or an explicit "not published". Nothing is inferred from a spec, because there is no
+  published spec to infer from.
+surfaces_covered:
+  - VistaCenter outbound webhooks (asyncapi/vitalconnect-vistacenter-webhooks.yml)
+authentication:
+  style: undocumented
+  note: >-
+    Webhook configuration is performed by an authenticated VistaCenter administrator, but the
+    guide documents no signing secret, shared token, mTLS or other authentication on the
+    outbound POST itself, and no authentication scheme for the platform API.
+  see: null
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  header: null
+  retention: null
+  note: >-
+    No replay-protection mechanism is documented anywhere in the public material. Webhook
+    deliveries carry an "event ID", which a subscriber could use to de-duplicate on its own
+    side, but VitalConnect documents no delivery guarantee, no retry policy and no
+    idempotency key for any request it accepts, so there is no provider-side contract to record.
+pagination:
+  style: undocumented
+  params: []
+  response_fields: []
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_tracing:
+  header: null
+  note: An "event ID" accompanies each webhook payload; no request-correlation header is documented.
+versioning:
+  style: product-release
+  note: >-
+    Versioning is expressed as product releases (VistaSolution 3.2, VistaPoint 3.6,
+    VistaCenter 3.5.4) documented per-revision in the Instructions For Use library. No API
+    version identifier, header or URI segment is published.
+  see: lifecycle/vitalconnect-lifecycle.yml
+error_envelope:
+  shape: undocumented
+  rfc9457: false
+rate_limit_signaling:
+  documented: false
+  see: rate-limits/vitalconnect-rate-limits.yml
+reversibility:
+  grade: na
+  applies: false
+  note: >-
+    The only publicly documented surface is outbound webhook delivery — VistaCenter emits
+    events to a subscriber-controlled URL. There is no public write operation an integrator can
+    invoke against VitalConnect, so there is nothing to reverse, cancel, void or restore. This
+    is an honest "not applicable", not a zero. Whether the non-public VitalConnect Platform API
+    (MAN-001) exposes reversible writes cannot be established from public material.
+  operations: []
+  windows: []
+dry_run_mode:
+  supported: unknown
+  note: >-
+    The VistaCenter webhook editor exposes a "Send All Current Data" toggle that the guide
+    labels internal debugging only and instructs administrators not to use. That is not a
+    documented dry-run facility and is recorded here only so the toggle is not mistaken for one.
+evidence:
+  - url: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+    status: 200
+  - url: https://www.fda.gov/media/137398/download
+    status: 200
+    note: >-
+      FDA-cleared VitalPatch Instructions For Use (IFU-10 EUA Rev. 7) — the document that
+      establishes the API exists and that the developer guide must be requested from the company.

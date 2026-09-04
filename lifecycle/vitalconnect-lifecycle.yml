@@ -1,0 +1,64 @@
+generated: '2026-09-04'
+method: searched
+source: https://vitalconnect.com/resources/
+versioning:
+  scheme: product-release
+  current:
+    VistaPoint: '3.6'
+    VistaCenter: 3.5.4
+    VistaSolution (IT Administration Guide): '3.2'
+  docs: https://vitalconnect.com/resources/
+  note: >-
+    VitalConnect versions the platform as regulated product releases, each with its own
+    controlled document revision (IFU-29 for VistaPoint 3.6, IFU-27 Rev. Z for VistaCenter
+    3.5.4, MAN-027 Rev. G for the VistaSolution IT Administration Guide). Superseded revisions
+    are replaced in place at the same /docs/ URL rather than archived, so there is no public
+    version history to walk. No API version identifier is published.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy, sunset schedule or RFC 8594 header support is published.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+    - url: https://status.vitalconnect.com/
+      status: 0
+      note: does not resolve in public DNS
+    - url: https://vitalconnect.com/status/
+      status: 404
+  note: >-
+    No status page. Nothing published anywhere reports platform availability; NO StatusPage
+    pointer is emitted.
+changelog:
+  url: null
+  note: >-
+    No dated changelog. Product change is communicated through revised controlled documents
+    and through the newsroom press-release stream, neither of which is a release log.
+deprecated_operations: []
+document_library:
+  - id: IFU-29
+    title: VistaPoint 3.6 Cardiac Monitoring Instructions for Use
+    url: https://vitalconnect.com/docs/ifu029/IFU-29.html
+  - id: IFU-26
+    title: VistaPoint 3.6 Remote Patient Monitoring Instructions for Use
+    url: https://vitalconnect.com/docs/ifu026/IFU-26-RPM.html
+  - id: IFU-27
+    title: VistaCenter Instructions for Use (Rev. Z, VistaCenter 3.5.4)
+    url: https://vitalconnect.com/docs/ifu027/IFU-27.html
+  - id: IFU-06
+    title: VitalPatch Instructions for Use
+    url: https://vitalconnect.com/docs/ifu006/IFU-06.html
+  - id: MAN-027
+    title: VistaSolution IT Administration Guide (Rev. G, December 2023)
+    url: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+  - id: MAN-001
+    title: VitalConnect Platform Integration Manual - Developer Guide
+    url: null
+    availability: on-request
+    note: >-
+      Named in the FDA-cleared VitalPatch Instructions For Use as the document that carries API
+      implementation information; readers are directed to contact VitalConnect, Inc. to obtain
+      it. It is not published at any public URL.

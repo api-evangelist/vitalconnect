@@ -1,0 +1,93 @@
+generated: '2026-09-04'
+method: probed
+source: live GET of each named /.well-known/ path on every host this record knows
+note: >-
+  Every named discovery path was probed and every one returned 404 on the only public
+  VitalConnect host that resolves. The company's platform hosts are published only as the
+  wildcard *.prod.vitalconnect.com in MAN-027 (VistaSolution IT Administration Guide), and no
+  concrete production host under it resolves in public DNS, so there was no second host to probe.
+  NO WellKnown or SecurityTxt pointer is emitted: this file records an absence, not a surface.
+hit_count: 0
+path_echo_control: passed
+hosts:
+  - host: https://vitalconnect.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/aauth-resource.json
+        status: 404
+        file: null
+      - path: /.well-known/ucp.json
+        status: 404
+        file: null
+      - path: /.well-known/acp.json
+        status: 404
+        file: null
+      - path: /.well-known/apis.json
+        status: 404
+        file: null
+      - path: /apis.json
+        status: 404
+        file: null
+      - path: /apis.yml
+        status: 404
+        file: null
+      - path: /.well-known/vitalconnect-negative-control-7f3ab91c.json
+        status: 404
+        file: null
+        note: negative control — a 404 here means this host does not echo paths
+contract_discovery:
+  note: >-
+    STEP 0b contract-discovery probes run against the same host. All missed.
+  probes:
+    - url: https://vitalconnect.com/openapi.json
+      status: 404
+    - url: https://vitalconnect.com/openapi.yaml
+      status: 404
+    - url: https://vitalconnect.com/swagger.json
+      status: 404
+    - url: https://vitalconnect.com/v1/openapi.json
+      status: 404
+    - url: https://vitalconnect.com/api-docs
+      status: 404
+    - url: https://vitalconnect.com/redoc
+      status: 404
+    - url: https://vitalconnect.com/llms.txt
+      status: 404
+    - url: https://vitalconnect.com/developers/
+      status: 404
+    - url: https://vitalconnect.com/api/
+      status: 404
+    - url: https://api.vitalconnect.com/
+      status: 0
+      note: does not resolve in public DNS
+    - url: https://developer.vitalconnect.com/
+      status: 0
+      note: does not resolve in public DNS
+    - url: https://docs.vitalconnect.com/
+      status: 200
+      note: >-
+        Resolves to ghs.google.com and redirects to a Google Accounts sign-in scoped to
+        hd=vitalconnect.com — an internal Google Drive share, not a public docs host.

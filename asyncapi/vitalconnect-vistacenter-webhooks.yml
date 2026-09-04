@@ -1,0 +1,88 @@
+generated: '2026-09-04'
+method: searched
+source: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+spec_type: none
+note: >-
+  VitalConnect publishes NO AsyncAPI document. It does publicly document a real outbound
+  webhook surface: VistaCenter, the cloud clinician application, POSTs event payloads to a
+  customer-configured Target URL. Everything below is transcribed from MAN-027 Rev. G,
+  "VitalConnect IT Administration Guide" (VistaSolution 3.2), the only public first-party
+  technical document that describes the integration surface. Nothing here is inferred — the
+  payload field list, the event classes and the configuration steps are as the guide states
+  them. The guide gives no JSON schema, no signing scheme and no delivery/retry semantics,
+  and those gaps are recorded as unknown rather than guessed.
+surface:
+  name: VistaCenter Webhooks
+  kind: outbound-webhook
+  direction: vistacenter-to-subscriber
+  transport: HTTPS
+  method: POST
+  endpoint_owner: subscriber
+  endpoint_note: >-
+    There is no VitalConnect-side base URL. The subscriber supplies a "Target URL" provided by
+    the application service provider; VistaCenter POSTs to it. Outbound traffic originates from
+    the VitalConnect platform hosts, published only as the wildcard *.prod.vitalconnect.com.
+  configuration:
+    ui: VistaCenter administrator interface -> Webhooks
+    requires: VistaCenter account with administrator-level permission to manage webhooks
+    fields:
+      - name: Target URL
+        description: The URL provided by the application service provider that events are POSTed to.
+      - name: Organization
+        description: Which organization's events the webhook is scoped to.
+      - name: Event types
+        description: Which event classes the webhook subscribes to.
+      - name: Send All Current Data
+        description: >-
+          Present in the UI but documented as internal debugging only. The guide instructs
+          administrators NOT to select it.
+  firewall:
+    note: >-
+      The guide instructs IT administrators to allow-list HTTPS, the ports and the IP addresses
+      needed for webhook delivery, but does not publish the egress IP ranges. VitalConnect states
+      it will provide an outbound IP/port list on request.
+payload:
+  format: unspecified
+  documented_fields:
+    - name: event type
+      description: The class of event that occurred.
+    - name: event ID
+      description: Identifier for the individual event.
+    - name: event object
+      description: An object carrying the event-identifying fields.
+  schema_published: false
+  signing: unknown
+  retry_policy: unknown
+  ordering: unknown
+events:
+  - id: notification
+    summary: A VistaCenter patient notification fired (for example a heart-rate or respiration-rate threshold).
+    documented_use: Integration with alternate notification services.
+  - id: new-patient
+    summary: A new patient was created.
+    documented_use: Integration with EHR/billing services.
+  - id: new-device
+    summary: A new relay device was registered.
+  - id: device-updated
+    summary: An existing relay device record changed.
+    triggers:
+      - Patch ID changes
+      - Source GUID (patient identifier) changes
+      - Relay name changes (for example, to a patient name)
+      - Source name changes
+      - Theater key changes
+      - Theater description changes
+integration_scope:
+  outbound_only: true
+  ehr_read_supported: false
+  ehr_read_note: >-
+    MAN-027 states plainly that, to maintain HIPAA compliance, the VitalConnect solution does not
+    support retrieval of information from EHR systems, and directs integrators to contact
+    VitalConnect for EHR integration assistance.
+x-evidence:
+  fetched: '2026-09-04'
+  url: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+  http_status: 200
+  content_type: application/pdf
+  document: MAN-027 Rev. G, December 2023 — sections "Third-Party Application Integration",
+    "Firewall Configuration for Webhooks", "Configuring Webhooks"

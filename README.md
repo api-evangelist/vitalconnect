@@ -64,5 +64,46 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-VitalConnect is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/vitalconnect_stock/
+VitalConnect is a San Jose, California medical device company whose VitalPatch biosensor and Vista
+Solution platform deliver continuous wireless remote patient monitoring and mobile cardiac
+telemetry. The single-use adhesive VitalPatch streams up to eleven physiological measurements —
+single-lead ECG, heart rate, heart rate variability, respiratory rate, skin temperature, body
+posture, fall detection and step count — to VistaPoint relay software running on a VistaTablet or
+VistaPhone, and on to the cloud-hosted VistaCenter clinician dashboard used for cardiac monitoring,
+hospital-at-home, inpatient expansion, chronic disease management and decentralized clinical
+trials.
+
+## API surface
+
+**VitalConnect has an API and does not publish it.** The FDA-cleared VitalPatch Instructions For
+Use state that the device "is compatible with Relay devices and software developed with the
+VitalConnect Application Programming Interface (API)" and direct integrators to contact
+VitalConnect, Inc. to obtain **MAN-001, the VitalConnect Platform Integration Manual — Developer
+Guide**. That document is not published at any public URL. There is no developer portal, no API
+reference, no OpenAPI/AsyncAPI/GraphQL definition, no SDK in any public package registry, no
+Postman collection, no MCP server, no agent card and no `/.well-known/` discovery document. The
+platform hosts appear in public material only as the wildcard `*.prod.vitalconnect.com`.
+
+One integration surface **is** publicly documented: **VistaCenter webhooks**. MAN-027 Rev. G, the
+VistaSolution IT Administration Guide, describes how a VistaCenter administrator configures an
+outbound webhook that POSTs notification, new-patient, new-device and device-update events to a
+subscriber-supplied Target URL, carrying an event type, an event ID and an object of
+event-identifying fields. That surface is captured in
+[`asyncapi/vitalconnect-vistacenter-webhooks.yml`](asyncapi/vitalconnect-vistacenter-webhooks.yml).
+The same guide states that, to maintain HIPAA compliance, the solution does **not** support
+reading information back out of EHR systems.
+
+## Links
+
+- Website — https://vitalconnect.com/
+- Resources / Instructions For Use library — https://vitalconnect.com/resources/
+- VistaSolution IT Administration Guide (MAN-027 Rev. G, PDF) — https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+- Contact / technical support — https://vitalconnect.com/contact/
+- Compliance program — https://vitalconnect.com/compliance/
+- Newsroom — https://vitalconnect.com/newsroom/
+
+## Corporate
+
+iRhythm Technologies agreed on 6 August 2026 to acquire VitalConnect for approximately
+$287.5 million, expected to close by the end of 2026. VitalConnect was operating independently at
+the time of this profile.

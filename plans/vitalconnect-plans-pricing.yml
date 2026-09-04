@@ -1,0 +1,22 @@
+generated: '2026-09-04'
+method: searched
+source: https://vitalconnect.com/
+plan_count: 0
+note: >-
+  VitalConnect publishes no pricing, plans or rate card of any kind. It sells a regulated
+  medical device and a monitoring service to hospitals, health systems, IDTFs and clinical-trial
+  sponsors under negotiated agreements; the site has no /pricing page (404) and the page sitemap
+  contains none. The only money-facing public pages are patient invoice payment forms
+  (/pay-invoice/, /patients/patient-pay-bill/), which are billing collection for an already
+  enrolled patient, not a published plan. No API pricing exists because no public API program
+  exists — access to the VitalConnect Platform API is arranged with the company directly.
+plans: []
+evidence:
+  - url: https://vitalconnect.com/pricing/
+    status: 404
+  - url: https://vitalconnect.com/page-sitemap.xml
+    status: 200
+    note: full page inventory; no pricing or plans page present
+  - url: https://vitalconnect.com/pay-invoice/
+    status: 200
+    note: patient invoice payment, not a published plan

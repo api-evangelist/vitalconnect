@@ -1,0 +1,19 @@
+generated: '2026-09-04'
+method: searched
+source: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+limit_count: 0
+note: >-
+  No rate limits are published. The VitalConnect Platform API reference (MAN-001, VitalConnect
+  Platform Integration Manual - Developer Guide) is not public, and the one public first-party
+  technical document that describes an integration surface, MAN-027 Rev. G, documents webhook
+  configuration and firewall allow-listing without stating any request quota, throttle, burst
+  ceiling, response header or 429 behaviour. An honest zero: checked, nothing published.
+limits: []
+headers: []
+exhaustion_status: null
+evidence:
+  - url: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+    status: 200
+    note: no rate-limit, quota, throttle or 429 language anywhere in the guide
+  - url: https://vitalconnect.com/developers/
+    status: 404

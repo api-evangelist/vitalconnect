@@ -1,18 +1,72 @@
 aid: vitalconnect
 name: VitalConnect
-description: 'VitalConnect is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  VitalConnect is a San Jose, California medical device company whose VitalPatch biosensor and
+  Vista Solution platform deliver continuous wireless remote patient monitoring and mobile
+  cardiac telemetry. The single-use adhesive VitalPatch streams up to eleven physiological
+  measurements — single-lead ECG, heart rate, heart rate variability, respiratory rate, skin
+  temperature, body posture, fall detection and step count — to VistaPoint relay software running
+  on a VistaTablet or VistaPhone, and on to the cloud-hosted VistaCenter clinician dashboard used
+  for cardiac monitoring, hospital-at-home, inpatient expansion, chronic disease management and
+  decentralized clinical trials. The VitalConnect Platform exposes an application programming
+  interface documented in MAN-001, the VitalConnect Platform Integration Manual — Developer
+  Guide, which the FDA-cleared VitalPatch Instructions For Use direct integrators to request
+  directly from the company; no public developer portal, API reference or machine-readable
+  specification is published. VistaCenter does publicly document an outbound webhook surface that
+  POSTs notification, patient and device events to a customer-configured target URL for EHR,
+  billing and alerting integrations. iRhythm Technologies agreed in August 2026 to acquire
+  VitalConnect for approximately $287.5 million.
+image: https://vitalconnect.com/wp-content/uploads/2026/02/VitalConnect%C2%AE-black-276px-center78px.png
 url: https://raw.githubusercontent.com/api-evangelist/vitalconnect/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-source-url: https://forgeglobal.com/vitalconnect_stock/
+x-tier: profiled
+x-tier-reason: enrichment-pass
 specificationVersion: '0.20'
 created: '2026-09-04'
 modified: '2026-09-04'
 tags:
-- Company
-apis: []
+- Health
+- Healthcare
+- Medical Devices
+- Remote Patient Monitoring
+- Cardiac Monitoring
+- Biosensors
+- Wearables
+- Telehealth
+- Clinical Trials
+- Webhooks
+apis:
+- aid: vitalconnect:vistacenter-webhooks
+  name: VistaCenter Webhooks
+  description: >-
+    VistaCenter, VitalConnect's cloud clinician application, transmits events to third-party
+    application servers by POSTing to a subscriber-supplied Target URL. Event classes are patient
+    notifications, new patients, new relay devices and relay-device updates; the payload carries
+    an event type, an event ID and an object of event-identifying fields. Configured by a
+    VistaCenter administrator and documented publicly in MAN-027 Rev. G, the VistaSolution IT
+    Administration Guide. This is the only VitalConnect integration surface with public
+    first-party documentation — the VitalConnect Platform API itself is documented only in
+    MAN-001, which is available on request from the company.
+  humanURL: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
+  image: https://vitalconnect.com/wp-content/uploads/2026/02/VitalConnect%C2%AE-black-276px-center78px.png
+  x-baseURL-status: >-
+    No baseURL is recorded on purpose. VitalConnect publishes no API host: the IT Administration
+    Guide names the platform destination only as the wildcard *.prod.vitalconnect.com, and no
+    concrete host under it resolves in public DNS. The webhook surface is outbound in any case —
+    VistaCenter POSTs to a subscriber-supplied Target URL, so the base belongs to the subscriber,
+    not to VitalConnect. Recorded as missing rather than guessed from the domain.
+  position: Producing
+  tags:
+  - Webhooks
+  - Remote Patient Monitoring
+  - Cardiac Monitoring
+  properties:
+  - type: Webhooks
+    url: asyncapi/vitalconnect-vistacenter-webhooks.yml
+  - type: Documentation
+    url: https://vitalconnect.com/docs/man027/MAN-027_RevG_VistaSolution-IT-Admin-Guide.pdf
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +74,65 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/vitalconnect_stock/
+  url: https://vitalconnect.com/
+- type: Documentation
+  url: https://vitalconnect.com/resources/
+- type: Support
+  url: https://vitalconnect.com/contact/
+- type: Blog
+  url: https://vitalconnect.com/newsroom/
+- type: BlogRSS
+  url: https://vitalconnect.com/feed/
+- type: TermsOfService
+  url: https://vitalconnect.com/eula/
+- type: PrivacyPolicy
+  url: https://vitalconnect.com/privacy-policy/
+- type: Compliance
+  url: https://vitalconnect.com/compliance/
+- type: Webhooks
+  url: asyncapi/vitalconnect-vistacenter-webhooks.yml
+- type: Conventions
+  url: conventions/vitalconnect-conventions.yml
+- type: Lifecycle
+  url: lifecycle/vitalconnect-lifecycle.yml
+- type: Plans
+  url: plans/vitalconnect-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/vitalconnect-rate-limits.yml
+- type: LLMsTxt
+  url: llms/vitalconnect-llms.txt
+- type: DomainSecurity
+  url: security/vitalconnect-domain-security.yml
+x-enrichment:
+  date: '2026-09-04'
+  status: minimal
+  artifacts_added: 8
+  pass: local-v3
+x-coverage:
+  state: gated
+  reason: sales-gate
+  detail: >-
+    The FDA-cleared VitalPatch Instructions For Use state that the device works with software
+    built on "the VitalConnect Application Programming Interface (API)" and then direct the
+    reader to contact VitalConnect, Inc. to obtain MAN-001, the VitalConnect Platform Integration
+    Manual - Developer Guide — so the reference exists, is named in a regulatory filing, and is
+    published nowhere: vitalconnect.com has no /developers or /api page, api. and
+    developer.vitalconnect.com do not resolve, docs.vitalconnect.com is an internal Google Drive
+    share behind an hd=vitalconnect.com sign-in, and every named /.well-known/ and spec path
+    404s.
+  evidence:
+  - url: https://www.fda.gov/media/137398/download
+    status: 200
+  - url: https://vitalconnect.com/developers/
+    status: 404
+  - url: https://vitalconnect.com/openapi.json
+    status: 404
+  - url: https://vitalconnect.com/.well-known/api-catalog
+    status: 404
+  - url: https://vitalconnect.com/llms.txt
+    status: 404
+  - url: https://docs.vitalconnect.com/
+    status: 200
+  - url: https://api.vitalconnect.com/
+    status: 0
+  checked: '2026-09-04'
