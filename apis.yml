@@ -36,6 +36,17 @@ tags:
 - Wearables
 - Telehealth
 - Clinical Trials
+- Webhook
+tags_raw:
+- Health
+- Healthcare
+- Medical Devices
+- Remote Patient Monitoring
+- Cardiac Monitoring
+- Biosensors
+- Wearables
+- Telehealth
+- Clinical Trials
 - Webhooks
 apis:
 - aid: vitalconnect:vistacenter-webhooks
@@ -59,6 +70,10 @@ apis:
     not to VitalConnect. Recorded as missing rather than guessed from the domain.
   position: Producing
   tags:
+  - Webhook
+  - Remote Patient Monitoring
+  - Cardiac Monitoring
+  tags_raw:
   - Webhooks
   - Remote Patient Monitoring
   - Cardiac Monitoring
